@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+clear
+echo -------FILTER
+sudo iptables -L -v -n
+echo
+
+echo -------NAT
+sudo iptables -t nat -L -v -n
+echo
+
+for ctr in $(machinectl --no-legend list | cut -d' ' -f 1); do
+    if [ "$ctr" == "No" ]; then
+        exit 0
+    fi
+    echo -------$ctr
+    pid=$(machinectl status $ctr | grep Leader | egrep -o '[0-9]*')
+    sudo nsenter -t $pid -n iptables -L -v -n
+    echo
+    echo
+done

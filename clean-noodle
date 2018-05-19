@@ -1,0 +1,12 @@
+#!/bin/bash
+# (c) David Preece 2016-2017
+# davep@polymath.tech : https://polymath.tech/ : https://github.com/rantydave
+# This work licensed under the Non-profit Open Software Licence version 3 (https://opensource.org/licenses/NPOSL-3.0)
+# For commercial licensing see https://20ft.nz/
+
+sudo zfs destroy -R tf/layer-
+sudo rm -rf /var/lib/machines/
+sudo iptables -F FORWARD
+sudo iptables -F OUTPUT
+sudo iptables -t nat -F POSTROUTING
+sudo iptables -t nat -F PREROUTING

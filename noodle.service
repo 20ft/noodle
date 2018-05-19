@@ -1,0 +1,17 @@
+[Unit]
+Description=Node for 20ft
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/20ft/noodle
+ExecStart=/usr/bin/python3 noodle.py
+Environment=PYTHONUNBUFFERED=1
+KillSignal=SIGINT
+TimeoutStopSec=10
+RestartSec=5
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
