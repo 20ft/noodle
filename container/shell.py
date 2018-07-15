@@ -1,7 +1,15 @@
-# (c) David Preece 2016-2017
-# davep@polymath.tech : https://polymath.tech/ : https://github.com/rantydave
-# This work licensed under the Non-profit Open Software Licence version 3 (https://opensource.org/licenses/NPOSL-3.0)
-# For commercial licensing see https://20ft.nz/
+# Copyright (c) 2016-2018 David Preece - davep@polymath.tech, All rights reserved.
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 """A shell running inside the container"""
 # The differences between a shell and a process are that:
 # * A process only returns individual lines of data, shell returns whatever it can whenever it can
@@ -56,7 +64,7 @@ class Shell:
     def _proc(container, msg):
         # don't use -F because it buggers up sending signals
         command = ['nsenter', '-m', '-u', '-i', '-n', '-p', '-U', '-C', '-t', str(container.namespace_pid())]
-        shells = ('zsh', 'ksh', 'bash', 'ash', 'sh')
+        shells = ('bash', 'ash', 'sh', 'zsh', 'ksh', 'fish')
         shell_cmd = None
 
         # find a shell
